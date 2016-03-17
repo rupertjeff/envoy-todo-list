@@ -51,4 +51,18 @@ class TemplatesTest extends TestCase
                 'title' => 'Users',
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function it_returns_create_user_template()
+    {
+        $this->get(route('templates.users.create'))
+            ->seeJsonStructure([
+                'title',
+                'content',
+            ])->seeJson([
+                'title' => 'Create User',
+            ]);
+    }
 }

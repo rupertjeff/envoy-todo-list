@@ -57,4 +57,18 @@ class TemplateController extends Controller
                 'content' => view('templates.users.index')->render(),
             ]);
     }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    public function createUser()
+    {
+        return response()
+            ->json([
+                'title' => 'Create User',
+                'content' => view('templates.users.create')->render(),
+            ]);
+    }
 }
