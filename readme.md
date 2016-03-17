@@ -15,9 +15,9 @@ The project you will be creating is a simple todo list/task manager. Here’s wh
 * [ ] Create a single page responsive layout
 * [ ] There should be a form that allows you to select a User, and add a Task to the ToDo list
 * [ ] The Task should at the very least include a title
-* [ ] BONUS: Allow users to create a short description of the Task
+* [x] BONUS: Allow users to create a short description of the Task
 * [ ] BONUS: Create categories for Tasks, and organize tasks by category
 * [ ] In a separate section on the page, show a list of all the Tasks currently assigned
 * [ ] Make sure to implement a way to delete tasks (may want AJAX for this)
 * [ ] The design is completely up to you -- creative freedom!
-* [ ] BONUS: Use a JavaScript framework like Angular.js or Backbone.js
+* [x] BONUS: Use a JavaScript framework like Angular.js or Backbone.js
