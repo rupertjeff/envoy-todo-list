@@ -37,4 +37,18 @@ class TemplatesTest extends TestCase
                 'title' => 'Create Task',
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function it_returns_users_template()
+    {
+        $this->get(route('templates.users.index'))
+            ->seeJsonStructure([
+                'title',
+                'content',
+            ])->seeJson([
+                'title' => 'Users',
+            ]);
+    }
 }

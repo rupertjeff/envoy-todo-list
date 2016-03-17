@@ -43,4 +43,18 @@ class TemplateController extends Controller
                 'content' => view('templates.tasks.create')->render(),
             ]);
     }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    public function users()
+    {
+        return response()
+            ->json([
+                'title' => 'Users',
+                'content' => view('templates.users.index')->render(),
+            ]);
+    }
 }
