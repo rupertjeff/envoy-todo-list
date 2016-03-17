@@ -20,6 +20,7 @@ Route::group(['prefix' => 'tasks'], function () {
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', ['uses' => 'UserController@index', 'as' => 'users.index']);
     Route::post('/', ['uses' => 'UserController@store', 'as' => 'users.store']);
+    Route::get('{id}', ['uses' => 'UserController@view', 'as' => 'users.view']);
     Route::delete('{id}', ['uses' => 'UserController@destroy', 'as' => 'users.destroy']);
 });
 

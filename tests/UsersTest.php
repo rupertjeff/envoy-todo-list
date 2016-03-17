@@ -38,8 +38,8 @@ class UsersTest extends TestCase
     public function it_creates_a_user()
     {
         $this->post('users', [
-            'name'                  => 'New User',
-            'email'                 => 'test@example.com',
+            'name'  => 'New User',
+            'email' => 'test@example.com',
         ])->seeJson([
             'id'    => 1,
             'name'  => 'New User',
@@ -72,6 +72,22 @@ class UsersTest extends TestCase
         $this->delete('users/1')
             ->seeJson([
                 'error' => 'User does not exist.',
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_a_user()
+    {
+        /** @var User $user */
+        $user = factory(User::class)->create();
+
+        $this->get('users/' . $user->getKey())
+            ->seeJson([
+                'id'    => '' . $user->getKey(),
+                'name'  => $user->name,
+                'email' => $user->email,
             ]);
     }
 }

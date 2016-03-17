@@ -49,6 +49,12 @@ class UserController extends Controller
             ->json(User::create($data));
     }
 
+    public function view($id)
+    {
+        return response()
+            ->json(User::findOrFail($id));
+    }
+
     /**
      * @param DeleteUserRequest $request
      * @param int               $id
