@@ -10,6 +10,7 @@
 namespace App\Http\Controllers;
 
 use App\Database\Models\Task;
+use App\Http\Requests\Task\Create as CreateTaskRequest;
 
 /**
  * Class TaskController
@@ -25,5 +26,16 @@ class TaskController extends Controller
     {
         return response()
             ->json(Task::all());
+    }
+
+    /**
+     * @param CreateTaskRequest $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(CreateTaskRequest $request)
+    {
+        return response()
+            ->json(Task::create($request->only('user_id', 'name', 'description')));
     }
 }
