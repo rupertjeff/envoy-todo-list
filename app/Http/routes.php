@@ -27,6 +27,10 @@ Route::group(['prefix' => 'api'], function () {
     });
 });
 
+Route::group(['prefix' => 'templates'], function () {
+    Route::get('tasks', ['uses' => 'TemplateController@tasks', 'as' => 'templates.tasks.index']);
+});
+
 // Basic route to get us into the application.
 Route::get('/', function () {
     return view('main');
