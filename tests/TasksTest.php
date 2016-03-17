@@ -68,4 +68,15 @@ class TasksTest extends TestCase
                 'id'      => '' . $task->getKey(),
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function it_responds_with_an_error_when_a_nonexistent_task_is_deleted()
+    {
+        $this->delete('tasks/1')
+            ->seeJson([
+                'error' => 'Task does not exist.',
+            ]);
+    }
 }

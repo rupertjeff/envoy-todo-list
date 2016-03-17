@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Database\Models\Task;
 use App\Http\Requests\Task\Create as CreateTaskRequest;
 use App\Http\Requests\Task\Delete as DeleteTaskRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Class TaskController
@@ -45,16 +46,24 @@ class TaskController extends Controller
      * @param int               $id
      *
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy(DeleteTaskRequest $request, $id)
     {
-        $task = Task::findOrFail($id);
-        $task->delete();
+        try {
+            $task = Task::findOrFail($id);
+            $task->delete();
 
-        return response()
-            ->json([
-                'deleted' => true,
-                'id'      => $task->getKey(),
-            ]);
+            return response()
+                ->json([
+                    'deleted' => true,
+                    'id'      => $task->getKey(),
+                ]);
+        } catch (ModelNotFoundException $e) {
+            return response()
+                ->json([
+                    'error' => 'Task does not exist.',
+                ]);
+        }
     }
 }

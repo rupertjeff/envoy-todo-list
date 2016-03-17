@@ -69,9 +69,7 @@ class UsersTest extends TestCase
      */
     public function it_responds_with_error_when_nonexistent_user_is_deleted()
     {
-        $user = factory(User::class, 1)->create();
-
-        $this->delete('users/' . ($user->getKey() + 1))
+        $this->delete('users/1')
             ->seeJson([
                 'error' => 'User does not exist.',
             ]);
