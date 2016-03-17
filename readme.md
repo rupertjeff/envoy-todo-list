@@ -6,7 +6,7 @@ The project you will be creating is a simple todo list/task manager. Here’s wh
 
 ### Backend
 
-* [ ] Using MVC principles, craft an application that supports Tasks and Users
+* [x] Using MVC principles, craft an application that supports Tasks and Users
 * [ ] Each Task will belong to a particular User, and a User can have many Tasks
 * [ ] The app should run through a single page (may want to use AJAX for this)
 
