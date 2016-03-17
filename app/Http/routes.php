@@ -11,6 +11,10 @@
 |
 */
 
+Route::group(['prefix' => 'tasks'], function () {
+    Route::get('/', ['uses' => 'TaskController@index', 'as' => 'tasks.index']);
+});
+
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', ['uses' => 'UserController@index', 'as' => 'users.index']);
     Route::post('/', ['uses' => 'UserController@store', 'as' => 'users.store']);

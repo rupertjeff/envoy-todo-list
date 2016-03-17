@@ -1,6 +1,5 @@
 <?php
 use App\Database\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 /**
  * Name: UsersTest.php
@@ -12,8 +11,6 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
  */
 class UsersTest extends TestCase
 {
-    use DatabaseMigrations;
-
     /**
      * @test
      */
