@@ -20,6 +20,35 @@ class UsersTest extends TestCase
     {
         // No users
         $this->get('users')
-            ->seeJson([]);
+            ->seeJsonStructure([]);
+
+        // Some users exist
+        factory(\App\Database\Models\User::class, 4)->create();
+        $this->get('users')
+            ->seeJsonStructure([
+                '*' => [
+                    'id',
+                    'name',
+                    'email',
+                ],
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_creates_a_user()
+    {
+        $this->withoutMiddleware();
+        $this->post('users', [
+            'name'                  => 'New User',
+            'email'                 => 'test@example.com',
+            'password'              => 'password',
+            'password_confirmation' => 'password',
+        ])->seeJson([
+            'id'    => 1,
+            'name'  => 'New User',
+            'email' => 'test@example.com',
+        ]);
     }
 }

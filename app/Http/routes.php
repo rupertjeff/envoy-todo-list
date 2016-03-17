@@ -13,6 +13,7 @@
 
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', ['uses' => 'UserController@index', 'as' => 'users.index']);
+    Route::post('/', ['uses' => 'UserController@store', 'as' => 'users.store']);
 });
 
 // Basic route to get us into the application.

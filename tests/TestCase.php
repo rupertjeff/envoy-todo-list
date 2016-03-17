@@ -22,4 +22,37 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         return $app;
     }
+
+    /**
+     * NOTE: Taken from Laravel 5.2.
+     *
+     * Assert that the JSON response has a given structure.
+     *
+     * @param  array|null  $structure
+     * @param  array|null  $responseData
+     * @return $this
+     */
+    public function seeJsonStructure(array $structure = null, $responseData = null)
+    {
+        if (is_null($structure)) {
+            return $this->seeJson();
+        }
+        if (! $responseData) {
+            $responseData = json_decode($this->response->getContent(), true);
+        }
+        foreach ($structure as $key => $value) {
+            if (is_array($value) && $key === '*') {
+                $this->assertInternalType('array', $responseData);
+                foreach ($responseData as $responseDataItem) {
+                    $this->seeJsonStructure($structure['*'], $responseDataItem);
+                }
+            } elseif (is_array($value)) {
+                $this->assertArrayHasKey($key, $responseData);
+                $this->seeJsonStructure($structure[$key], $responseData[$key]);
+            } else {
+                $this->assertArrayHasKey($value, $responseData);
+            }
+        }
+        return $this;
+    }
 }

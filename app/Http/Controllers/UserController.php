@@ -10,11 +10,21 @@
 namespace App\Http\Controllers;
 
 use App\Database\Models\User;
+use App\Http\Requests\User\Create as CreateUserRequest;
 
 class UserController extends Controller
 {
     public function index()
     {
         return User::all()->toJson();
+    }
+
+    public function store(CreateUserRequest $request)
+    {
+        return User::create($request->only([
+            'name',
+            'email',
+            'password',
+        ]))->toJson();
     }
 }
