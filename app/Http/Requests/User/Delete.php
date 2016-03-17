@@ -5,11 +5,11 @@ namespace App\Http\Requests\User;
 use App\Http\Requests\Request;
 
 /**
- * Class Create
+ * Class Delete
  *
  * @package App\Http\Requests\User
  */
-class Create extends Request
+class Delete extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,8 +18,7 @@ class Create extends Request
      */
     public function authorize()
     {
-        // Normally this would require authentication. For the purposes of this
-        // example, everyone can create users
+        // Normally this would require authentication.
         return true;
     }
 
@@ -30,10 +29,8 @@ class Create extends Request
      */
     public function rules()
     {
+        // No rules, because id is required in the route.
         return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed',
         ];
     }
 }

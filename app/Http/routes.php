@@ -14,6 +14,7 @@
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', ['uses' => 'UserController@index', 'as' => 'users.index']);
     Route::post('/', ['uses' => 'UserController@store', 'as' => 'users.store']);
+    Route::delete('{id}', ['uses' => 'UserController@destroy', 'as' => 'users.destroy']);
 });
 
 // Basic route to get us into the application.
