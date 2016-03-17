@@ -19,12 +19,12 @@ class UsersTest extends TestCase
     public function it_shows_a_listing_of_the_current_users()
     {
         // No users
-        $this->get('users')
+        $this->get(route('api.users.index'))
             ->seeJsonStructure([]);
 
         // Some users exist
         factory(User::class, 4)->create();
-        $this->get('users')
+        $this->get(route('api.users.index'))
             ->seeJsonStructure([
                 '*' => [
                     'id',
@@ -39,7 +39,7 @@ class UsersTest extends TestCase
      */
     public function it_creates_a_user()
     {
-        $this->post('users', [
+        $this->post(route('api.users.store'), [
             'name'  => 'New User',
             'email' => 'test@example.com',
         ])->seeJson([
@@ -57,7 +57,7 @@ class UsersTest extends TestCase
         /** @var User $user */
         $user = factory(User::class, 1)->create();
 
-        $this->delete('users/' . $user->getKey())
+        $this->delete(route('api.users.destroy', $user))
             ->seeJson([
                 // Quick way to force the key to be a string, as we’re not using
                 // a transformer for the api responses.
@@ -71,7 +71,7 @@ class UsersTest extends TestCase
      */
     public function it_responds_with_error_when_nonexistent_user_is_deleted()
     {
-        $this->delete('users/1')
+        $this->delete(route('api.users.destroy', [1]))
             ->seeJson([
                 'error' => 'User does not exist.',
             ]);
@@ -85,7 +85,7 @@ class UsersTest extends TestCase
         /** @var User $user */
         $user = factory(User::class)->create();
 
-        $this->get('users/' . $user->getKey())
+        $this->get(route('api.users.view', $user))
             ->seeJson([
                 'id'    => '' . $user->getKey(),
                 'name'  => $user->name,
@@ -105,7 +105,7 @@ class UsersTest extends TestCase
             'user_id' => $user->getKey(),
         ]);
 
-        $this->get(route('users.view', $user) . '?with=tasks')
+        $this->get(route('api.users.view', $user) . '?with=tasks')
             ->seeJsonStructure([
                 'id',
                 'name',

@@ -18,12 +18,12 @@ class TasksTest extends TestCase
     public function it_shows_a_listing_of_the_current_tasks()
     {
         // No tasks
-        $this->get('tasks')
+        $this->get(route('api.tasks.index'))
             ->seeJson([]);
 
         // Some tasks exist
         factory(Task::class, 4)->create();
-        $this->get('tasks')
+        $this->get(route('api.tasks.index'))
             ->seeJsonStructure([
                 '*' => [
                     'id',
@@ -41,7 +41,7 @@ class TasksTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->post('tasks', [
+        $this->post(route('api.tasks.store'), [
             'name'    => 'Task 1',
             'user_id' => $user->getKey(),
         ])->seeJson([
@@ -62,7 +62,7 @@ class TasksTest extends TestCase
             'user_id' => $user->getKey(),
         ]);
 
-        $this->delete('tasks/' . $task->getKey())
+        $this->delete(route('api.tasks.destroy', $task))
             ->seeJson([
                 'deleted' => true,
                 'id'      => '' . $task->getKey(),
@@ -74,7 +74,7 @@ class TasksTest extends TestCase
      */
     public function it_responds_with_an_error_when_a_nonexistent_task_is_deleted()
     {
-        $this->delete('tasks/1')
+        $this->delete(route('api.tasks.destroy', [1]))
             ->seeJson([
                 'error' => 'Task does not exist.',
             ]);
@@ -92,7 +92,7 @@ class TasksTest extends TestCase
             'user_id' => $user->getKey(),
         ]);
 
-        $this->get(route('tasks.view', $task))
+        $this->get(route('api.tasks.view', $task))
             ->seeJson([
                 'id'          => '' . $task->getKey(),
                 'name'        => $task->name,
@@ -112,7 +112,7 @@ class TasksTest extends TestCase
             'user_id' => $user->getKey(),
         ]);
 
-        $this->get(route('tasks.view', $task) . '?with=user')
+        $this->get(route('api.tasks.view', $task) . '?with=user')
             ->seeJsonStructure([
                 'id',
                 'name',

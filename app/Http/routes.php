@@ -11,18 +11,20 @@
 |
 */
 
-Route::group(['prefix' => 'tasks'], function () {
-    Route::get('/', ['uses' => 'TaskController@index', 'as' => 'tasks.index']);
-    Route::post('/', ['uses' => 'TaskController@store', 'as' => 'tasks.store']);
-    Route::get('{id}', ['uses' => 'TaskController@view', 'as' => 'tasks.view']);
-    Route::delete('{id}', ['uses' => 'TaskController@destroy', 'as' => 'tasks.destroy']);
-});
+Route::group(['prefix' => 'api'], function () {
+    Route::group(['prefix' => 'tasks'], function () {
+        Route::get('/', ['uses' => 'TaskController@index', 'as' => 'api.tasks.index']);
+        Route::post('/', ['uses' => 'TaskController@store', 'as' => 'api.tasks.store']);
+        Route::get('{id}', ['uses' => 'TaskController@view', 'as' => 'api.tasks.view']);
+        Route::delete('{id}', ['uses' => 'TaskController@destroy', 'as' => 'api.tasks.destroy']);
+    });
 
-Route::group(['prefix' => 'users'], function () {
-    Route::get('/', ['uses' => 'UserController@index', 'as' => 'users.index']);
-    Route::post('/', ['uses' => 'UserController@store', 'as' => 'users.store']);
-    Route::get('{id}', ['uses' => 'UserController@view', 'as' => 'users.view']);
-    Route::delete('{id}', ['uses' => 'UserController@destroy', 'as' => 'users.destroy']);
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', ['uses' => 'UserController@index', 'as' => 'api.users.index']);
+        Route::post('/', ['uses' => 'UserController@store', 'as' => 'api.users.store']);
+        Route::get('{id}', ['uses' => 'UserController@view', 'as' => 'api.users.view']);
+        Route::delete('{id}', ['uses' => 'UserController@destroy', 'as' => 'api.users.destroy']);
+    });
 });
 
 // Basic route to get us into the application.
