@@ -1,4 +1,4 @@
-<form class="col-xs-12" name="createTaskForm" ng-controller="CreateTaskController as createTask">
+<form class="col-xs-12" name="createTaskForm">
     <button class="btn btn-info" ng-click="createTask.toggleForm()" ng-if=" ! createTask.showForm" type="button">Create New Task</button>
     <div ng-if="createTask.showForm">
         <div class="form-group">

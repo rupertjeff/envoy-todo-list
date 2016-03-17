@@ -17,58 +17,34 @@ namespace App\Http\Controllers;
 class TemplateController extends Controller
 {
     /**
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
-     * @throws \Throwable
+     * @return \Illuminate\View\View
      */
     public function tasks()
     {
-        return response()
-            ->json([
-                'title'   => 'Tasks',
-                'content' => view('templates.tasks.index')->render(),
-            ]);
+        return view('templates.tasks.index');
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
-     * @throws \Throwable
+     * @return \Illuminate\View\View
      */
     public function createTask()
     {
-        return response()
-            ->json([
-                'title'   => 'Create Task',
-                'content' => view('templates.tasks.create')->render(),
-            ]);
+        return view('templates.tasks.create');
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
-     * @throws \Throwable
+     * @return \Illuminate\View\View
      */
     public function users()
     {
-        return response()
-            ->json([
-                'title' => 'Users',
-                'content' => view('templates.users.index')->render(),
-            ]);
+        return view('templates.users.index');
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
-     * @throws \Throwable
+     * @return \Illuminate\View\View
      */
     public function createUser()
     {
-        return response()
-            ->json([
-                'title' => 'Create User',
-                'content' => view('templates.users.create')->render(),
-            ]);
+        return view('templates.users.create');
     }
 }

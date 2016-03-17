@@ -25,12 +25,19 @@
         </div>
     </header>
     <section id="main" class="container-fluid">
-        <div class="row">
-        </div>
-        <div class="row">
-        </div>
+        <div ng-view></div>
     </section>
     <footer>
+        <nav class="main-navigation js-main-navigation">
+            <ul>
+                <li class="nav-link">
+                    <a href="#/users">Users</a>
+                </li>
+                <li class="nav-link">
+                    <a href="#/tasks">Tasks</a>
+                </li>
+            </ul>
+        </nav>
     </footer>
 
     {{-- Overriding this section may not be necessary in this example. --}}

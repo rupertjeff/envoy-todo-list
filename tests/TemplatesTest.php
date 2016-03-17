@@ -16,12 +16,8 @@ class TemplatesTest extends TestCase
     public function it_returns_tasks_template()
     {
         $this->get(route('templates.tasks.index'))
-            ->seeJsonStructure([
-                'title',
-                'content',
-            ])->seeJson([
-                'title' => 'Tasks',
-            ]);
+            ->see('task-list')
+            ->see('task.name');
     }
 
     /**
@@ -30,12 +26,7 @@ class TemplatesTest extends TestCase
     public function it_returns_create_task_template()
     {
         $this->get(route('templates.tasks.create'))
-            ->seeJsonStructure([
-                'title',
-                'content',
-            ])->seeJson([
-                'title' => 'Create Task',
-            ]);
+            ->see('Description (optional)');
     }
 
     /**
@@ -44,12 +35,8 @@ class TemplatesTest extends TestCase
     public function it_returns_users_template()
     {
         $this->get(route('templates.users.index'))
-            ->seeJsonStructure([
-                'title',
-                'content',
-            ])->seeJson([
-                'title' => 'Users',
-            ]);
+            ->see('user-list')
+            ->see('user.name');
     }
 
     /**
@@ -58,11 +45,6 @@ class TemplatesTest extends TestCase
     public function it_returns_create_user_template()
     {
         $this->get(route('templates.users.create'))
-            ->seeJsonStructure([
-                'title',
-                'content',
-            ])->seeJson([
-                'title' => 'Create User',
-            ]);
+            ->see('Email');
     }
 }
