@@ -23,4 +23,18 @@ class TemplatesTest extends TestCase
                 'title' => 'Tasks',
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function it_returns_create_task_template()
+    {
+        $this->get(route('templates.tasks.create'))
+            ->seeJsonStructure([
+                'title',
+                'content',
+            ])->seeJson([
+                'title' => 'Create Task',
+            ]);
+    }
 }

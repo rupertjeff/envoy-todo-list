@@ -29,4 +29,18 @@ class TemplateController extends Controller
                 'content' => view('templates.tasks.index')->render(),
             ]);
     }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    public function createTask()
+    {
+        return response()
+            ->json([
+                'title'   => 'Create Task',
+                'content' => view('templates.tasks.create')->render(),
+            ]);
+    }
 }
