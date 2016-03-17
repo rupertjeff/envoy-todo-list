@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 
 use App\Database\Models\Task;
 use App\Http\Requests\Task\Create as CreateTaskRequest;
+use App\Http\Requests\Task\Delete as DeleteTaskRequest;
 
 /**
  * Class TaskController
@@ -37,5 +38,23 @@ class TaskController extends Controller
     {
         return response()
             ->json(Task::create($request->only('user_id', 'name', 'description')));
+    }
+
+    /**
+     * @param DeleteTaskRequest $request
+     * @param int               $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(DeleteTaskRequest $request, $id)
+    {
+        $task = Task::findOrFail($id);
+        $task->delete();
+
+        return response()
+            ->json([
+                'deleted' => true,
+                'id'      => $task->getKey(),
+            ]);
     }
 }

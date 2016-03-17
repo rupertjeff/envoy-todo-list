@@ -1,4 +1,6 @@
 <?php
+use App\Database\Models\Task;
+use App\Database\Models\User;
 
 /**
  * Name: TasksTest.php
@@ -20,7 +22,7 @@ class TasksTest extends TestCase
             ->seeJson([]);
 
         // Some tasks exist
-        factory(\App\Database\Models\Task::class, 4)->create();
+        factory(Task::class, 4)->create();
         $this->get('tasks')
             ->seeJsonStructure([
                 '*' => [
@@ -37,16 +39,33 @@ class TasksTest extends TestCase
      */
     public function it_creates_a_task()
     {
-        $user = factory(\App\Database\Models\User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->post('tasks', [
-            'name' => 'Task 1',
-            'user_id' => $user->getKey()
-        ])->seeJson([
-            'id' => 1,
+            'name'    => 'Task 1',
             'user_id' => $user->getKey(),
-            'name' => 'Task 1',
+        ])->seeJson([
+            'id'          => 1,
+            'user_id'     => $user->getKey(),
+            'name'        => 'Task 1',
             'description' => null,
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_deletes_a_task()
+    {
+        $user = factory(User::class)->create();
+        $task = factory(Task::class)->create([
+            'user_id' => $user->getKey(),
+        ]);
+
+        $this->delete('tasks/' . $task->getKey())
+            ->seeJson([
+                'deleted' => true,
+                'id'      => '' . $task->getKey(),
+            ]);
     }
 }
