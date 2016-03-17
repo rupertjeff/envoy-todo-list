@@ -37,12 +37,16 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+        $data = $request->only([
+            'name',
+            'email',
+        ]);
+        // Hardcoded password because it’s not needed for this example, though
+        // a more standardized implementation would use it.
+        $data['password'] = 'password';
+
         return response()
-            ->json(User::create($request->only([
-                'name',
-                'email',
-                'password',
-            ])));
+            ->json(User::create($data));
     }
 
     /**

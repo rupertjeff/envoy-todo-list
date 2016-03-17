@@ -33,7 +33,6 @@ class Create extends Request
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed',
         ];
     }
 }

@@ -43,8 +43,6 @@ class UsersTest extends TestCase
         $this->post('users', [
             'name'                  => 'New User',
             'email'                 => 'test@example.com',
-            'password'              => 'password',
-            'password_confirmation' => 'password',
         ])->seeJson([
             'id'    => 1,
             'name'  => 'New User',
@@ -62,7 +60,8 @@ class UsersTest extends TestCase
 
         $this->delete('users/' . $user->getKey())
             ->seeJson([
-                // quick way to force the key to be a string
+                // Quick way to force the key to be a string, as we’re not using
+                // a transformer for the api responses.
                 'id'      => '' . $user->getKey(),
                 'deleted' => true,
             ]);
