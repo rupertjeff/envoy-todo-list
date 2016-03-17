@@ -11,6 +11,11 @@
 |
 */
 
+Route::group(['prefix' => 'users'], function () {
+    Route::get('/', ['uses' => 'UserController@index', 'as' => 'users.index']);
+});
+
+// Basic route to get us into the application.
 Route::get('/', function () {
-    return view('welcome');
+    return view('main');
 });
