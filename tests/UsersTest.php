@@ -1,4 +1,6 @@
 <?php
+
+use App\Database\Models\Task;
 use App\Database\Models\User;
 
 /**
@@ -88,6 +90,32 @@ class UsersTest extends TestCase
                 'id'    => '' . $user->getKey(),
                 'name'  => $user->name,
                 'email' => $user->email,
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_a_user_and_an_associated_task_list()
+    {
+        /** @var User $user */
+        $user = factory(User::class)->create();
+
+        factory(Task::class, 10)->create([
+            'user_id' => $user->getKey(),
+        ]);
+
+        $this->get(route('users.view', $user) . '?with=tasks')
+            ->seeJsonStructure([
+                'id',
+                'name',
+                'email',
+                'tasks' => [
+                    '*' => [
+                        'id',
+                        'name',
+                    ],
+                ],
             ]);
     }
 }

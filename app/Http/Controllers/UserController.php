@@ -10,6 +10,7 @@
 namespace App\Http\Controllers;
 
 use App\Database\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Requests\User\Create as CreateUserRequest;
 use App\Http\Requests\User\Delete as DeleteUserRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -49,10 +50,25 @@ class UserController extends Controller
             ->json(User::create($data));
     }
 
-    public function view($id)
+    /**
+     * @param Request $request
+     * @param int     $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function view(Request $request, $id)
     {
+        if ($with = $request->query('with')) {
+            if ( ! is_array($with)) {
+                $with = explode(',', $with);
+            }
+            $user = User::with($with)->findOrFail($id);
+        } else {
+            $user = User::findOrFail($id);
+        }
+
         return response()
-            ->json(User::findOrFail($id));
+            ->json($user);
     }
 
     /**
