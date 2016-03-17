@@ -79,4 +79,49 @@ class TasksTest extends TestCase
                 'error' => 'Task does not exist.',
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function it_returns_a_task()
+    {
+        /** @var User $user */
+        $user = factory(User::class)->create();
+        /** @var Task $task */
+        $task = factory(Task::class)->create([
+            'user_id' => $user->getKey(),
+        ]);
+
+        $this->get(route('tasks.view', $task))
+            ->seeJson([
+                'id'          => '' . $task->getKey(),
+                'name'        => $task->name,
+                'description' => $task->description,
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_a_task_and_its_associated_user()
+    {
+        /** @var User $user */
+        $user = factory(User::class)->create();
+        /** @var Task $task */
+        $task = factory(Task::class)->create([
+            'user_id' => $user->getKey(),
+        ]);
+
+        $this->get(route('tasks.view', $task) . '?with=user')
+            ->seeJsonStructure([
+                'id',
+                'name',
+                'description',
+                'user' => [
+                    'id',
+                    'name',
+                    'email',
+                ],
+            ]);
+    }
 }

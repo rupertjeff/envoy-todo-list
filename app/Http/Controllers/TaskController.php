@@ -13,6 +13,7 @@ use App\Database\Models\Task;
 use App\Http\Requests\Task\Create as CreateTaskRequest;
 use App\Http\Requests\Task\Delete as DeleteTaskRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 /**
  * Class TaskController
@@ -39,6 +40,27 @@ class TaskController extends Controller
     {
         return response()
             ->json(Task::create($request->only('user_id', 'name', 'description')));
+    }
+
+    /**
+     * @param Request $request
+     * @param int     $id
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function view(Request $request, $id)
+    {
+        if ($with = $request->query('with')) {
+            if ( ! is_array($with)) {
+                $with = explode(',', $with);
+            }
+            $task = Task::with($with)->findOrFail($id);
+        } else {
+            $task = Task::findOrFail($id);
+        }
+
+        return response()
+            ->json($task);
     }
 
     /**
