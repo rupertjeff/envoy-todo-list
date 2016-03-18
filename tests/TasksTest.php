@@ -124,4 +124,43 @@ class TasksTest extends TestCase
                 ],
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function it_completes_a_task()
+    {
+        /** @var User $user */
+        $user = factory(User::class)->create();
+        /** @var Task $task */
+        $task = factory(Task::class)->create([
+            'user_id' => $user->getKey(),
+        ]);
+
+        $this->put(route('api.tasks.complete', $task))
+            ->seeJson([
+                'id' => '' . $task->getKey(),
+                'completed' => ! $task->isComplete(),
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_uncompletes_a_task()
+    {
+        /** @var User $user */
+        $user = factory(User::class)->create();
+        /** @var Task $task */
+        $task = factory(Task::class)->create([
+            'user_id' => $user->getKey(),
+            'completed' => true,
+        ]);
+
+        $this->put(route('api.tasks.complete', $task))
+            ->seeJson([
+                'id' => '' . $task->getKey(),
+                'completed' => ! $task->isComplete(),
+            ]);
+    }
 }

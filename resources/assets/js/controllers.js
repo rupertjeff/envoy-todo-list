@@ -12,9 +12,17 @@
     function TodoListController($scope, tasks, currentUser) {
         var self = this;
 
+        function completeTask(task) {
+            tasks.complete(task).then(function () {
+                updateTaskList();
+            });
+        }
+        this.completeTask = completeTask;
+
         function deleteTask(task) {
-            tasks.delete(task);
-            updateTaskList();
+            tasks.delete(task).then(function () {
+                updateTaskList();
+            });
         }
         this.deleteTask = deleteTask;
 

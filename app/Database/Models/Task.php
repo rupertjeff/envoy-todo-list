@@ -25,4 +25,24 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * @return bool
+     */
+    public function complete()
+    {
+        $state = ! (bool)$this->getAttribute('completed');
+        $this->setAttribute('completed', $state);
+        $this->save();
+
+        return $state;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isComplete()
+    {
+        return (bool)$this->getAttribute('completed');
+    }
 }

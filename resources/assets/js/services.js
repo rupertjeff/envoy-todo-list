@@ -47,6 +47,9 @@
             'get':       function (id) {
                 return $http.get([uri, id].join('/'));
             },
+            'complete': function (task) {
+                return $http.put([uri, task.id, 'complete'].join('/'));
+            },
             'delete':    function (task) {
                 return $http.delete([uri, task.id].join('/'));
             }

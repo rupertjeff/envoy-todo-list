@@ -16,6 +16,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::get('/', ['uses' => 'TaskController@index', 'as' => 'api.tasks.index']);
         Route::post('/', ['uses' => 'TaskController@store', 'as' => 'api.tasks.store']);
         Route::get('{id}', ['uses' => 'TaskController@view', 'as' => 'api.tasks.view']);
+        Route::put('{id}/complete', ['uses' => 'TaskController@complete', 'as' => 'api.tasks.complete']);
         Route::delete('{id}', ['uses' => 'TaskController@destroy', 'as' => 'api.tasks.destroy']);
     });
 

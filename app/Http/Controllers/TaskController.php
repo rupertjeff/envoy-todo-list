@@ -63,6 +63,18 @@ class TaskController extends Controller
             ->json($task);
     }
 
+    public function complete($id)
+    {
+        $task      = Task::findOrFail($id);
+        $completed = $task->complete();
+
+        return response()
+            ->json([
+                'completed' => $completed,
+                'id'        => $task->getKey(),
+            ]);
+    }
+
     /**
      * @param DeleteTaskRequest $request
      * @param int               $id
