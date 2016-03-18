@@ -102,9 +102,13 @@
 
         this.users = [];
 
-        users.all().then(function (response) {
-            self.users = response.data;
-        });
+        function loadUsers() {
+            users.all().then(function (response) {
+                self.users = response.data;
+            });
+        }
+
+        this.loadUsers = loadUsers;
 
         function selectUser(user) {
             currentUser.update(user.id).then(function () {
@@ -113,6 +117,16 @@
         }
 
         this.selectUser = selectUser;
+
+        function deleteUser(user) {
+            users.delete(user).then(function () {
+                self.loadUsers();
+            });
+        }
+
+        this.deleteUser = deleteUser;
+
+        this.loadUsers();
     }
 
     UserController.$inject = ['$location', 'userService', 'currentUserService'];
