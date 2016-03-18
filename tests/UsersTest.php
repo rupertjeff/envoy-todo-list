@@ -118,4 +118,40 @@ class UsersTest extends TestCase
                 ],
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function it_returns_a_users_task_list()
+    {
+        /** @var User $user */
+        $user = factory(User::class)->create();
+
+        factory(Task::class, 10)->create([
+            'user_id' => $user->getKey(),
+        ]);
+
+        $this->get(route('api.users.tasks', $user))
+            ->seeJsonStructure([
+                '*' => [
+                    'id',
+                    'name',
+                ],
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_responds_with_error_when_a_nonexistent_users_tasks_are_requested()
+    {
+        factory(Task::class, 10)->create([
+            'user_id' => 1,
+        ]);
+
+        $this->get(route('api.users.tasks', [1]))
+            ->seeJson([
+                'error' => 'User does not exist.',
+            ]);
+    }
 }

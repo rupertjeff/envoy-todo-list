@@ -15,6 +15,8 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  *
  * @package App\Database\Models
  *
+ * @property-read \Illuminate\Database\Eloquent\Collection $tasks
+ *
  * @method static User findOrFail($id)
  */
 class User extends Model implements AuthenticatableContract,

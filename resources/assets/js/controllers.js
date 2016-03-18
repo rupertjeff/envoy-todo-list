@@ -42,7 +42,6 @@
         $scope.$on('tasksUpdated', updateTaskList);
         updateTaskList();
     }
-
     TodoListController.$inject = ['$scope', 'taskService', 'currentUserService'];
     angular.module('todoAppControllers').controller('TodoListController', TodoListController);
 
@@ -68,11 +67,10 @@
             $location.path('/tasks');
         };
     }
-
     CreateTaskController.$inject = ['$location', 'taskService', 'userService'];
     angular.module('todoAppControllers').controller('CreateTaskController', CreateTaskController);
 
-    function UserController(users) {
+    function UserController($location, users, currentUser) {
         var self = this;
 
         this.users = [];
@@ -80,8 +78,15 @@
         users.all().then(function (response) {
             self.users = response.data;
         });
+
+        function selectUser(user) {
+            currentUser.update(user.id).then(function () {
+                $location.path('/tasks');
+            });
+        }
+        this.selectUser = selectUser;
     }
-    UserController.$inject = ['userService'];
+    UserController.$inject = ['$location', 'userService', 'currentUserService'];
     angular.module('todoAppControllers').controller('UserController', UserController);
 
     function CreateUserController($location, users) {

@@ -24,6 +24,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::get('/', ['uses' => 'UserController@index', 'as' => 'api.users.index']);
         Route::post('/', ['uses' => 'UserController@store', 'as' => 'api.users.store']);
         Route::get('{id}', ['uses' => 'UserController@view', 'as' => 'api.users.view']);
+        Route::get('{id}/tasks', ['uses' => 'UserController@tasks', 'as' => 'api.users.tasks']);
         Route::delete('{id}', ['uses' => 'UserController@destroy', 'as' => 'api.users.destroy']);
     });
 });

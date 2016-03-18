@@ -71,6 +71,19 @@ class UserController extends Controller
             ->json($user);
     }
 
+    public function tasks($id)
+    {
+        try {
+            return response()
+                ->json(User::findOrFail($id)->tasks);
+        } catch (ModelNotFoundException $e) {
+            return response()
+                ->json([
+                    'error' => 'User does not exist.',
+                ]);
+        }
+    }
+
     /**
      * @param DeleteUserRequest $request
      * @param int               $id

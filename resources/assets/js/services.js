@@ -22,7 +22,6 @@
             }
         };
     }
-
     UserService.$inject = ['$http'];
     angular.module('todoAppServices').factory('userService', UserService);
 
@@ -55,7 +54,6 @@
             }
         };
     }
-
     TaskService.$inject = ['$http', 'userService'];
     angular.module('todoAppServices').factory('taskService', TaskService);
 
@@ -67,13 +65,12 @@
                 return currentUser;
             },
             'update': function (id) {
-                users.get(id).then(function (response) {
+                return users.get(id).then(function (response) {
                     currentUser = response.data;
                 });
             }
         };
     }
-
     CurrentUserService.$inject = ['userService'];
     angular.module('todoAppServices').factory('currentUserService', CurrentUserService);
 }(window.angular));
