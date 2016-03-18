@@ -5,6 +5,7 @@
             <span class="task-name js-task-name">@{{ task.name }}</span>
             <span class="task-description js-task-description small" ng-if="task.description">@{{ task.description }}</span>
         </label>
-        <button class="task-remove js-task-remove" type="button">&times;</button>
+        <button class="task-remove js-task-remove" type="button" ng-click="todoList.deleteTask(task)">&times;</button>
     </li>
 </ul>
+<a href="#/tasks/create" class="btn btn-info">Add New Task</a>

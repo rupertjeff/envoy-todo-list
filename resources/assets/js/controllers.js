@@ -12,6 +12,12 @@
     function TodoListController($scope, tasks, currentUser) {
         var self = this;
 
+        function deleteTask(task) {
+            tasks.delete(task);
+            updateTaskList();
+        }
+        this.deleteTask = deleteTask;
+
         function updateTaskList() {
             var user = currentUser.get();
             if (null === user) {
@@ -41,8 +47,9 @@
 
         this.save = function (task) {
             task.user_id = task.user.id;
-            tasks.create(task);
-            this.redirect();
+            tasks.create(task).then(function () {
+                self.redirect();
+            });
         };
 
         this.cancel = function () {
@@ -70,9 +77,12 @@
     angular.module('todoAppControllers').controller('UserController', UserController);
 
     function CreateUserController($location, users) {
+        var self = this;
+
         this.save = function (user) {
-            users.create(user);
-            this.redirect();
+            users.create(user).then(function () {
+                self.redirect();
+            });
         };
 
         this.cancel = function () {
