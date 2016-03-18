@@ -1,3 +1,4 @@
+<div class="filter-note js-filter-note" ng-if="todoList.isFiltered()">@{{ todoList.getFilterMessage() }} <button class="filter-remove" type="button" ng-click="todoList.clearFilters()">&times;</button></div>
 <ul class="task-list js-task-list col-xs-12">
     <li ng-repeat="task in todoList.tasks" class="task js-task">
         <label>

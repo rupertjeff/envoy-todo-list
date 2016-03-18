@@ -8,7 +8,7 @@
             'all':      function () {
                 return $http.get(uri);
             },
-            'create': function (data) {
+            'create':   function (data) {
                 return $http.post(uri, data);
             },
             'get':      function (id) {
@@ -22,6 +22,7 @@
             }
         };
     }
+
     UserService.$inject = ['$http'];
     angular.module('todoAppServices').factory('userService', UserService);
 
@@ -46,7 +47,7 @@
             'get':       function (id) {
                 return $http.get([uri, id].join('/'));
             },
-            'complete': function (task) {
+            'complete':  function (task) {
                 return $http.put([uri, task.id, 'complete'].join('/'));
             },
             'delete':    function (task) {
@@ -54,6 +55,7 @@
             }
         };
     }
+
     TaskService.$inject = ['$http', 'userService'];
     angular.module('todoAppServices').factory('taskService', TaskService);
 
@@ -68,9 +70,13 @@
                 return users.get(id).then(function (response) {
                     currentUser = response.data;
                 });
+            },
+            'clear':  function () {
+                currentUser = null;
             }
         };
     }
+
     CurrentUserService.$inject = ['userService'];
     angular.module('todoAppServices').factory('currentUserService', CurrentUserService);
 }(window.angular));

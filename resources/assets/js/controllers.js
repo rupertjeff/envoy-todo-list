@@ -17,6 +17,7 @@
                 updateTaskList();
             });
         }
+
         this.completeTask = completeTask;
 
         function deleteTask(task) {
@@ -24,7 +25,31 @@
                 updateTaskList();
             });
         }
+
         this.deleteTask = deleteTask;
+
+        function isFiltered() {
+            var user = currentUser.get();
+
+            return null !== user;
+        }
+
+        this.isFiltered = isFiltered;
+
+        function getFilterMessage() {
+            var user = currentUser.get();
+
+            return 'Assigned to: ' + user.name;
+        }
+
+        this.getFilterMessage = getFilterMessage;
+
+        function clearFilters() {
+            currentUser.clear();
+            updateTaskList();
+        }
+
+        this.clearFilters = clearFilters;
 
         function updateTaskList() {
             var user = currentUser.get();
@@ -42,6 +67,7 @@
         $scope.$on('tasksUpdated', updateTaskList);
         updateTaskList();
     }
+
     TodoListController.$inject = ['$scope', 'taskService', 'currentUserService'];
     angular.module('todoAppControllers').controller('TodoListController', TodoListController);
 
@@ -67,6 +93,7 @@
             $location.path('/tasks');
         };
     }
+
     CreateTaskController.$inject = ['$location', 'taskService', 'userService'];
     angular.module('todoAppControllers').controller('CreateTaskController', CreateTaskController);
 
@@ -84,8 +111,10 @@
                 $location.path('/tasks');
             });
         }
+
         this.selectUser = selectUser;
     }
+
     UserController.$inject = ['$location', 'userService', 'currentUserService'];
     angular.module('todoAppControllers').controller('UserController', UserController);
 
@@ -106,6 +135,7 @@
             $location.path('/users');
         };
     }
+
     CreateUserController.$inject = ['$location', 'userService'];
     angular.module('todoAppControllers').controller('CreateUserController', CreateUserController);
 }(window.angular));
