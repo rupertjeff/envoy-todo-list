@@ -55,7 +55,7 @@ class UsersTest extends TestCase
     public function it_deletes_a_user()
     {
         /** @var User $user */
-        $user = factory(User::class, 1)->create();
+        $user = factory(User::class)->create();
 
         $this->delete(route('api.users.destroy', $user))
             ->seeJson([
@@ -63,6 +63,16 @@ class UsersTest extends TestCase
                 // a transformer for the api responses.
                 'id'      => '' . $user->getKey(),
                 'deleted' => true,
+            ]);
+
+        $user = factory(User::class)->create();
+        factory(Task::class, 10)->create([
+            'user_id' => $user->getKey(),
+        ]);
+
+        $this->delete(route('api.users.destroy', $user))
+            ->dontSeeInDatabase('tasks', [
+                'user_id' => $user->getKey(),
             ]);
     }
 

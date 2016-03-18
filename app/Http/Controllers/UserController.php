@@ -95,6 +95,11 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
+            // Avoid having orphaned items in the database. The spec requires a
+            // task to be associated to a user. Better ways to handle this could
+            // be to let tasks be unassigned, or to have the foreign constraint
+            // cascade the delete or cascade to null on user delete.
+            $user->tasks()->delete();
             $user->delete();
 
             // Would usually use a transformer of some kind to make sure the data
