@@ -11,22 +11,34 @@
                 .when('/users', {
                     'templateUrl':  '/templates/users',
                     'controller':   'UserController',
-                    'controllerAs': 'userList'
+                    'controllerAs': 'userList',
+                    'resolve': ['$rootScope', function ($rootScope) {
+                        $rootScope.pageTitle = 'Users';
+                    }]
                 })
                 .when('/users/create', {
                     'templateUrl':  '/templates/users/create',
                     'controller':   'CreateUserController',
-                    'controllerAs': 'createUser'
+                    'controllerAs': 'createUser',
+                    'resolve': ['$rootScope', function ($rootScope) {
+                        $rootScope.pageTitle = 'Create User';
+                    }]
                 })
                 .when('/tasks', {
                     'templateUrl':  '/templates/tasks',
                     'controller':   'TodoListController',
-                    'controllerAs': 'todoList'
+                    'controllerAs': 'todoList',
+                    'resolve': ['$rootScope', function ($rootScope) {
+                        $rootScope.pageTitle = 'Tasks';
+                    }]
                 })
                 .when('/tasks/create', {
                     'templateUrl':  '/templates/tasks/create',
                     'controller':   'CreateTaskController',
-                    'controllerAs': 'createTask'
+                    'controllerAs': 'createTask',
+                    'resolve': ['$rootScope', function ($rootScope) {
+                        $rootScope.pageTitle = 'Create Task';
+                    }]
                 })
                 .otherwise({
                     'redirectTo': '/tasks'

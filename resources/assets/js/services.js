@@ -8,6 +8,9 @@
             'all':      function () {
                 return $http.get(uri);
             },
+            'create': function (data) {
+                return $http.post(uri, data);
+            },
             'get':      function (id) {
                 return $http.get([uri, id].join('/'));
             },

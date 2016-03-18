@@ -69,4 +69,33 @@
 
     CreateTaskController.$inject = ['$rootScope', 'taskService', 'userService'];
     angular.module('todoAppControllers').controller('CreateTaskController', CreateTaskController);
+
+    function UserController(users) {
+        var self = this;
+
+        this.users = [];
+
+        users.all().then(function (response) {
+            self.users = response.data;
+        });
+    }
+    UserController.$inject = ['userService'];
+    angular.module('todoAppControllers').controller('UserController', UserController);
+
+    function CreateUserController($location, users) {
+        this.save = function (user) {
+            users.create(user);
+            this.redirect();
+        };
+
+        this.cancel = function () {
+            this.redirect();
+        };
+
+        this.redirect = function () {
+            $location.path('/users');
+        };
+    }
+    CreateUserController.$inject = ['$location', 'userService'];
+    angular.module('todoAppControllers').controller('CreateUserController', CreateUserController);
 }(window.angular));

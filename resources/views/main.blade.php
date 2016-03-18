@@ -21,7 +21,7 @@
 <body>
     <header class="container-fluid">
         <div class="row">
-            <h1 class="col-xs-12">Tasks</h1>
+            <h1 class="col-xs-12">@{{ pageTitle }}</h1>
         </div>
     </header>
     <section id="main" class="container-fluid">
