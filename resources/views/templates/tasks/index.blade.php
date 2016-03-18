@@ -1,5 +1,5 @@
 <ul class="task-list js-task-list col-xs-12">
-    <li ng-repeat="task in tasks" class="task js-task">
+    <li ng-repeat="task in todoList.tasks" class="task js-task">
         <label>
             <input type="checkbox" ng-checked="task.completed">
             <span class="task-name js-task-name">@{{ task.name }}</span>
