@@ -19,9 +19,11 @@
 </head>
 
 <body>
-    <header class="container-fluid">
-        <div class="row">
-            <h1 class="col-xs-12">@{{ pageTitle }}</h1>
+    <header class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">@{{ pageTitle }}</a>
+            </div>
         </div>
     </header>
     <section id="main" class="container-fluid">

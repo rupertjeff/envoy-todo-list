@@ -4,7 +4,7 @@ footer {
     left: 0;
     right: 0;
 
-    background: #8c6c34;
+    background: $navbar-inverse-bg;
 }
 
 .main-navigation {
@@ -27,11 +27,12 @@ footer {
             display: block;
             padding: 1em;
 
-            color: #ffffff;
+            color: $navbar-inverse-link-color;
             text-decoration: none;
 
             &:hover {
-                background-color: rgba(0, 0, 0, 0.1);
+                background-color: rgba(255, 255, 255, 0.2);
+                color: $navbar-inverse-link-hover-color;
             }
         }
     }
