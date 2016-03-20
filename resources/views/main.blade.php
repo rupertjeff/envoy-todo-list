@@ -22,12 +22,12 @@
     <header class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand">@{{ pageTitle }}</a>
+                <h1 class="navbar-brand">@{{ pageTitle }}</h1>
             </div>
         </div>
     </header>
     <section id="main" class="container-fluid">
-        <div ng-view></div>
+        <div class="row" ng-view></div>
     </section>
     <footer>
         <nav class="main-navigation js-main-navigation">

@@ -35,5 +35,13 @@ footer {
                 color: $navbar-inverse-link-hover-color;
             }
         }
+
+        &.nav-link-selected {
+            background-color: rgba(255, 255, 255, 0.1);
+
+            > a {
+                color: $navbar-inverse-link-active-color;
+            }
+        }
     }
 }

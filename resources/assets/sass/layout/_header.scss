@@ -1,0 +1,9 @@
+.navbar-inverse .navbar-brand {
+    margin: 0;
+
+    font-weight: normal;
+
+    &:hover {
+        color: $navbar-inverse-brand-color;
+    }
+}
