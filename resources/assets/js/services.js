@@ -30,8 +30,13 @@
         var uri = '/api/tasks';
 
         return {
-            'all':       function () {
-                return $http.get(uri);
+            'all':       function (extra) {
+                var path = uri;
+                if (extra) {
+                    path += '?with=' + extra.join(',');
+                }
+
+                return $http.get(path);
             },
             'allByUser': function (user) {
                 var id = user;

@@ -6,7 +6,7 @@
         <li ng-repeat="task in todoList.tasks" class="task js-task list-group-item item-has-checkbox">
             <label class="item-label">
                 <input class="item-checkbox" type="checkbox" ng-checked="task.completed" ng-click="todoList.completeTask(task)">
-                <span class="task-name js-task-name">@{{ task.name }}</span>
+                <span class="task-name js-task-name">@{{ task.name }} <span class="label label-default" ng-if="task.user.name">@{{ task.user.name }}</span></span>
                 <span class="task-description js-task-description small" ng-if="task.description">@{{ task.description }}</span>
             </label>
             <button class="task-remove item-remove js-task-remove" type="button" ng-click="todoList.deleteTask(task)">&times;</button>
