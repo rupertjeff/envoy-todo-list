@@ -20,6 +20,7 @@ elixir(function(mix) {
             'controllers.js',
             'app.js'
         ], 'public/js/app.js')
+        .copy('node_modules/bootstrap-sass/assets/fonts', 'public/fonts')
         .version([
             'css/app.css',
             'js/app.js'
