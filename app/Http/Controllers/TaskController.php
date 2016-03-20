@@ -23,12 +23,23 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     /**
+     * @param Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($with = $request->query('with')) {
+            if ( ! is_array($with)) {
+                $with = explode(',', $with);
+            }
+            $tasks = Task::with($with)->get();
+        } else {
+            $tasks = Task::all();
+        }
+
         return response()
-            ->json(Task::all());
+            ->json($tasks);
     }
 
     /**

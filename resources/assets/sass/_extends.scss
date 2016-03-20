@@ -18,21 +18,28 @@
 
         .item-checkbox {
             position: absolute;
+            top: 50%;
             left: 10px;
+            margin-top: -6px;
         }
 
         .item-remove {
+            @extend %remove;
+
             position: absolute;
             top: 0;
+            bottom: 0;
             right: 0;
             width: 46px;
-            height: 46px;
-            padding-bottom: 8px;
-            border: 0;
-
-            background: transparent none;
-            font-size: 24px;
-            line-height: 24px;
         }
     }
+}
+
+%remove {
+    padding-bottom: 8px;
+    border: 0;
+
+    background: transparent none;
+    font-size: 24px;
+    line-height: 24px;
 }

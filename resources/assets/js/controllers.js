@@ -54,7 +54,7 @@
         function updateTaskList() {
             var user = currentUser.get();
             if (null === user) {
-                tasks.all(['users']).then(function (response) {
+                tasks.all(['user']).then(function (response) {
                     self.tasks = response.data;
                 });
             } else {

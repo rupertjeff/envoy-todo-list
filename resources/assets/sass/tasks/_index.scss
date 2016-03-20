@@ -1,3 +1,7 @@
 .task-list {
     @extend %listing;
 }
+
+.filter-remove {
+    @extend %remove;
+}

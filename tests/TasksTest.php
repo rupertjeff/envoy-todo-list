@@ -22,7 +22,10 @@ class TasksTest extends TestCase
             ->seeJson([]);
 
         // Some tasks exist
-        factory(Task::class, 4)->create();
+        $user = factory(User::class)->create();
+        factory(Task::class, 4)->create([
+            'user_id' => $user->getKey(),
+        ]);
         $this->get(route('api.tasks.index'))
             ->seeJsonStructure([
                 '*' => [
@@ -30,6 +33,20 @@ class TasksTest extends TestCase
                     'user_id',
                     'name',
                     'description',
+                ],
+            ]);
+
+        $this->get(route('api.tasks.index') . '?with=user')
+            ->seeJsonStructure([
+                '*' => [
+                    'id',
+                    'name',
+                    'description',
+                    'user' => [
+                        'id',
+                        'name',
+                        'email',
+                    ],
                 ],
             ]);
     }
