@@ -98,6 +98,17 @@ class TasksTest extends TestCase
                 'name'        => $task->name,
                 'description' => $task->description,
             ]);
+
+        $this->get(route('api.tasks.view', $task) . '?with=user')
+            ->seeJsonStructure([
+                'id',
+                'name',
+                'description',
+                'user' => [
+                    'id',
+                    'name',
+                ],
+            ]);
     }
 
     /**
