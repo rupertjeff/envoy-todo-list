@@ -1,0 +1,10 @@
+.create-user {
+    position: absolute;
+    top: -63px;
+    right: 5px;
+    z-index: 2;
+}
+
+.user-list {
+    @extend %listing;
+}
