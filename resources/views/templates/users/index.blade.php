@@ -1,3 +1,4 @@
+<h2>Users</h2>
 <a class="btn btn-info create-user" href="#/users/create" role="button">Create User</a>
 <ul class="user-list js-user-list list-group">
     <li class="user js-user list-group-item" ng-repeat="user in userList.users">

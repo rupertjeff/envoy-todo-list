@@ -1,3 +1,4 @@
+<h2>Tasks</h2>
 <div class="filter-note js-filter-note" ng-if="todoList.isFiltered()">@{{ todoList.getFilterMessage() }}
     <button class="filter-remove" type="button" ng-click="todoList.clearFilters()">
         <span class="glyphicon glyphicon-remove"></span>

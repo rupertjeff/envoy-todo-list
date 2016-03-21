@@ -22,7 +22,7 @@
     <header class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <h1 class="navbar-brand">@{{ pageTitle }}</h1>
+                <h1 class="navbar-brand">Task List</h1>
             </div>
         </div>
     </header>

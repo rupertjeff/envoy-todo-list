@@ -1,3 +1,4 @@
+<h2>Create User</h2>
 <form name="createUserForm">
     <div class="form-group">
         <label for="user-name" class="sr-only">Name</label>

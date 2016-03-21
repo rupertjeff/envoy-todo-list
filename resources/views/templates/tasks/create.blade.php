@@ -1,3 +1,4 @@
+<h2>Create Task</h2>
 <form name="createTaskForm">
     <div class="form-group">
         <label for="task-name" class="sr-only">Task</label>
