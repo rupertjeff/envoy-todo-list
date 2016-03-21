@@ -1,4 +1,4 @@
-<form class="col-xs-12" name="createUserForm">
+<form name="createUserForm">
     <div class="form-group">
         <label for="user-name" class="sr-only">Name</label>
         <input type="text" id="user-name" class="form-control" placeholder="User Name" ng-model="user.name">

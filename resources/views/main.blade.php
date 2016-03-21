@@ -27,7 +27,12 @@
         </div>
     </header>
     <section id="main" class="container-fluid">
-        <div class="row" ng-view></div>
+        <div class="row">
+            <div class="col-xs-12" ng-class="{ 'col-sm-8': showSidebar, 'col-md-7': showSidebar, 'col-md-offset-1': showSidebar, 'col-lg-6': showSidebar, 'col-lg-offset-2': showSidebar }" ng-view></div>
+            <div class="col-sm-4 col-md-3 col-lg-2 hidden-xs" ng-class="{ hide: ! showSidebar }">
+                @include('partials.sidebar')
+            </div>
+        </div>
     </section>
     <footer>
         <nav class="main-navigation js-main-navigation">

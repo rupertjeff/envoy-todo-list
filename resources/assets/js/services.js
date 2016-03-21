@@ -64,8 +64,10 @@
     TaskService.$inject = ['$http', 'userService'];
     angular.module('todoAppServices').factory('taskService', TaskService);
 
-    function CurrentUserService(users) {
+    function CurrentUserService($rootScope, users) {
         var currentUser = null;
+
+        $rootScope.showSidebar = false;
 
         return {
             'get':    function () {
@@ -74,14 +76,20 @@
             'update': function (id) {
                 return users.get(id).then(function (response) {
                     currentUser = response.data;
+                    $rootScope.showSidebar = true;
+                    $rootScope.$broadcast('sidebar.loadTasks');
+                }, function () {
+                    currentUser = null;
+                    $rootScope.showSidebar = false;
                 });
             },
             'clear':  function () {
                 currentUser = null;
+                $rootScope.showSidebar = false;
             }
         };
     }
 
-    CurrentUserService.$inject = ['userService'];
+    CurrentUserService.$inject = ['$rootScope', 'userService'];
     angular.module('todoAppServices').factory('currentUserService', CurrentUserService);
 }(window.angular));

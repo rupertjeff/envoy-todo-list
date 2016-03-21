@@ -1,4 +1,4 @@
-<form class="col-xs-12" name="createTaskForm">
+<form name="createTaskForm">
     <div class="form-group">
         <label for="task-name" class="sr-only">Task</label>
         <input type="text" id="task-name" class="form-control" placeholder="Task" ng-model="task.name">

@@ -152,4 +152,19 @@
 
     CreateUserController.$inject = ['$location', 'userService'];
     angular.module('todoAppControllers').controller('CreateUserController', CreateUserController);
+
+    function ShowAllTasksController($scope, tasks) {
+        var self = this;
+
+        function updateList() {
+            tasks.all(['user']).then(function (response) {
+                self.tasks = response.data;
+            });
+        }
+
+        $scope.$on('sidebar.loadTasks', updateList);
+    }
+
+    ShowAllTasksController.$inject = ['$scope', 'taskService'];
+    angular.module('todoAppControllers').controller('ShowAllTasksController', ShowAllTasksController);
 }(window.angular));

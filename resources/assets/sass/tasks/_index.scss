@@ -2,6 +2,10 @@
     @extend %listing;
 }
 
+.filter-note {
+    margin-bottom: 1em;
+}
+
 .filter-remove {
     @extend %remove;
 }
